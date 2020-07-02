@@ -1,6 +1,6 @@
 # MP4P
 
-A library for working with ISO/IEC Base Media File Format Library, also known as MP4 files.
+A library for working with ISO/IEC Base Media File Format files, also known as MP4 files.
 
 ## Adding to your project
 
