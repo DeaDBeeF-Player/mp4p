@@ -2,8 +2,8 @@
 #define mp4parser_h
 
 #include <stdint.h>
-#include "mp4pfile.h"
-#include "mp4patomdata.h"
+#include <mp4p/mp4pfile.h>
+#include <mp4p/mp4patomdata.h>
 
 
 typedef size_t (*mp4p_atom_data_write_func_t) (void *atom_data, uint8_t *buffer, uint32_t buffer_size);
