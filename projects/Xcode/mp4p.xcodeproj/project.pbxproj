@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2D71F17324AE706D00E753D3 /* mp4patomdata.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D71F17024AE706D00E753D3 /* mp4patomdata.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2D71F17824AE715300E753D3 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 2D71F17624AE715300E753D3 /* COPYING */; };
-		2D71F17924AE715300E753D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2D71F17724AE715300E753D3 /* README.md */; };
 		2D71F18D24AE733700E753D3 /* mp4p.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D71F18B24AE733700E753D3 /* mp4p.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D71F18E24AE733700E753D3 /* mp4pfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D71F18C24AE733700E753D3 /* mp4pfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D9E5C2324AE6B050099B108 /* mp4p.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D9E5C1924AE6B050099B108 /* mp4p.framework */; };
@@ -221,8 +219,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D71F17924AE715300E753D3 /* README.md in Resources */,
-				2D71F17824AE715300E753D3 /* COPYING in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
