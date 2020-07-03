@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "mp4pfile.h"
+#include <mp4p/mp4pfile.h>
 
 #ifndef __linux__
 #define O_LARGEFILE 0

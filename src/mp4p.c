@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mp4p.h"
+#include <mp4p/mp4p.h>
 
 static mp4p_atom_t *
 _atom_load (mp4p_atom_t *parent_atom, mp4p_file_callbacks_t *fp);

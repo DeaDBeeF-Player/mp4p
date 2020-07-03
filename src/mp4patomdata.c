@@ -8,8 +8,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "mp4p.h"
-#include "mp4patomdata.h"
+#include <mp4p/mp4p.h>
+#include <mp4p/mp4patomdata.h>
 
 #define READ_UINT8() ({if (buffer_size < 1) return -1; uint8_t _temp8 = *buffer; buffer++; buffer_size--; _temp8;})
 #define READ_UINT16() ({if (buffer_size < 2) return -1; uint16_t _temp16 = (buffer[1]) | (buffer[0]<<8); buffer+=2, buffer_size -= 2; _temp16;})
