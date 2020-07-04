@@ -7,6 +7,7 @@
 //
 
 #include <fcntl.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <mp4p/mp4pfile.h>
