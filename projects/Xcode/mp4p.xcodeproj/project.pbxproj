@@ -30,7 +30,7 @@
 
 /* Begin PBXFileReference section */
 		2D71F17024AE706D00E753D3 /* mp4patomdata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mp4patomdata.h; sourceTree = "<group>"; };
-		2D71F17624AE715300E753D3 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = COPYING; path = ../../COPYING; sourceTree = "<group>"; };
+		2D71F17624AE715300E753D3 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../../LICENSE.txt; sourceTree = "<group>"; };
 		2D71F17724AE715300E753D3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		2D71F18B24AE733700E753D3 /* mp4p.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mp4p.h; sourceTree = "<group>"; };
 		2D71F18C24AE733700E753D3 /* mp4pfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mp4pfile.h; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				2D9E5C1D24AE6B050099B108 /* Info.plist */,
-				2D71F17624AE715300E753D3 /* COPYING */,
+				2D71F17624AE715300E753D3 /* LICENSE.txt */,
 				2D71F17724AE715300E753D3 /* README.md */,
 				2D71F16E24AE706D00E753D3 /* include */,
 				2D9E5C3A24AE6BCC0099B108 /* src */,
