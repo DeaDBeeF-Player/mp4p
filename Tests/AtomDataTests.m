@@ -328,7 +328,7 @@
         .reserved2 = "5647382",
         .reserved3 = "6",
         .asc_size = 24,
-        .asc = "24bytefillabcdefghijklm"
+        .asc = (uint8_t *)"24bytefillabcdefghijklm"
     };
 
     size_t bufsize = mp4p_alac_atomdata_write(&data, NULL, 0);
@@ -451,7 +451,7 @@
         .asc_size = 24,
         .asc = "24bytefillabcdefghijklm",
         .remainder_size = 6,
-        .remainder = "ghjklm"
+        .remainder = (uint8_t *)"ghjklm"
     };
 
     size_t bufsize = mp4p_esds_atomdata_write(&data, NULL, 0);

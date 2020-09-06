@@ -205,51 +205,51 @@ mp4p_atom_t *createFakeMP4File (void) {
     return ftyp;
 }
 
-typedef struct {
-    mp4p_file_callbacks_t cb;
-    off_t pos;
-    off_t size;
-} fake_callbacks_t;
-
-static ssize_t _fake_read (struct mp4p_file_callbacks_s *stream, void *ptr, size_t size) {
-    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
-    cb->pos += size;
-    return size;
-}
-static ssize_t _fake_write (struct mp4p_file_callbacks_s *stream, void *ptr, size_t size) {
-    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
-    cb->pos += size;
-    return size;
-}
-static off_t _fake_seek (struct mp4p_file_callbacks_s *stream, off_t offset, int whence) {
-    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
-    switch (whence) {
-        case SEEK_SET:
-            cb->pos = offset;
-            break;
-        case SEEK_CUR:
-            cb->pos += offset;
-            break;
-        case SEEK_END:
-            cb->pos = cb->size + offset;
-            break;
-        default:
-            return -1;
-    }
-    return cb->pos;
-}
-
-static off_t _fake_tell (struct mp4p_file_callbacks_s *stream) {
-    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
-    return cb->pos;
-}
-
-static int _fake_truncate (struct mp4p_file_callbacks_s *stream, off_t length) {
-    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
-    cb->size = length;
-    return 0;
-}
-
+//typedef struct {
+//    mp4p_file_callbacks_t cb;
+//    off_t pos;
+//    off_t size;
+//} fake_callbacks_t;
+//
+//static ssize_t _fake_read (struct mp4p_file_callbacks_s *stream, void *ptr, size_t size) {
+//    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
+//    cb->pos += size;
+//    return size;
+//}
+//static ssize_t _fake_write (struct mp4p_file_callbacks_s *stream, void *ptr, size_t size) {
+//    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
+//    cb->pos += size;
+//    return size;
+//}
+//static off_t _fake_seek (struct mp4p_file_callbacks_s *stream, off_t offset, int whence) {
+//    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
+//    switch (whence) {
+//        case SEEK_SET:
+//            cb->pos = offset;
+//            break;
+//        case SEEK_CUR:
+//            cb->pos += offset;
+//            break;
+//        case SEEK_END:
+//            cb->pos = cb->size + offset;
+//            break;
+//        default:
+//            return -1;
+//    }
+//    return cb->pos;
+//}
+//
+//static off_t _fake_tell (struct mp4p_file_callbacks_s *stream) {
+//    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
+//    return cb->pos;
+//}
+//
+//static int _fake_truncate (struct mp4p_file_callbacks_s *stream, off_t length) {
+//    fake_callbacks_t *cb = (fake_callbacks_t *)stream;
+//    cb->size = length;
+//    return 0;
+//}
+//
 //static fake_callbacks_t _fake_file_cb = {
 //    .cb.read = _fake_read,
 //    .cb.write = _fake_write,
@@ -332,7 +332,7 @@ static int _fake_truncate (struct mp4p_file_callbacks_s *stream, off_t length) {
         .data = &stts
     };
 
-    int64_t startsample = 0;
+    uint64_t startsample = 0;
     uint32_t mp4sample = mp4p_stts_mp4sample_containing_sample (&atom, 1000000, &startsample);
 
     XCTAssertEqual (mp4sample, 20);
@@ -360,7 +360,7 @@ static int _fake_truncate (struct mp4p_file_callbacks_s *stream, off_t length) {
         .data = &stts
     };
 
-    int64_t startsample = 0;
+    uint64_t startsample = 0;
     uint32_t mp4sample = mp4p_stts_mp4sample_containing_sample (&atom, 620000, &startsample);
 
     XCTAssertEqual (mp4sample, 12);
