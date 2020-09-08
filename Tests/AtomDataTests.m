@@ -594,5 +594,22 @@
     XCTAssertEqual(values[3], 0);
 }
 
+- (void)test_replaygainMetadataWrite_CorrectSize {
+    mp4p_atom_t *ilst = mp4p_atom_new ("ilst");
+    mp4p_atom_append(ilst, mp4p_ilst_create_custom("REPLAYGAIN_ALBUM_GAIN", "-1 dB"));
+    mp4p_atom_append(ilst, mp4p_ilst_create_custom("REPLAYGAIN_ALBUM_PEAK", "0.5"));
+    mp4p_atom_append(ilst, mp4p_ilst_create_custom("REPLAYGAIN_TRACK_GAIN", "-1 dB"));
+    mp4p_atom_append(ilst, mp4p_ilst_create_custom("REPLAYGAIN_TRACK_PEAK", "0.5"));
+    mp4p_atom_update_size(ilst);
+
+    size_t bufsize = mp4p_atom_to_buffer(ilst, NULL, 0);
+    uint8_t *buffer = malloc (bufsize);
+    size_t writtensize = mp4p_atom_to_buffer(ilst, buffer, (uint32_t)bufsize);
+    XCTAssertEqual (bufsize, writtensize);
+
+    mp4p_atom_free(ilst);
+    free (buffer);
+}
+
 
 @end

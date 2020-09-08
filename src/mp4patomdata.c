@@ -1269,7 +1269,7 @@ mp4p_ilst_meta_atomdata_write (mp4p_ilst_meta_t *atom_data, uint8_t *buffer, siz
         WRITE_BUF(atom_data->name, (uint32_t)strlen(atom_data->name));
     }
     // data atom
-    if (atom_data->text || atom_data->values) {
+    if (atom_data->text || atom_data->values || atom_data->blob) {
         uint32_t data_atom_size = atom_data->data_size+16;
         WRITE_UINT32(data_atom_size);
         WRITE_BUF("data", 4);
@@ -1291,7 +1291,7 @@ mp4p_ilst_meta_atomdata_write (mp4p_ilst_meta_t *atom_data, uint8_t *buffer, siz
         }
         WRITE_BUF(atom_data->text, atom_data->data_size);
     }
-    else if (atom_data->data_version_flags == 2) {
+    else if (atom_data->blob) {
         WRITE_BUF(atom_data->blob,atom_data->data_size);
     }
     else {
