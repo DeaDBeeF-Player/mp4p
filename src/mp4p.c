@@ -861,8 +861,6 @@ mp4p_atom_new (const char *type) {
     return atom;
 }
 
-// NOTE: the cloned atom's data is a direct pointer to src data.
-// The downside is that the source must exist until the dest is deleted.
 mp4p_atom_t *
 mp4p_atom_clone (mp4p_atom_t *src) {
     mp4p_atom_t *dest = mp4p_atom_new (src->type);
@@ -877,14 +875,19 @@ mp4p_atom_clone (mp4p_atom_t *src) {
         dest->data = src->data;
     }
 
-    mp4p_atom_t *tail = NULL;
-
     if (src->subatoms) {
-        dest->subatoms = mp4p_atom_clone(src->subatoms);
+        dest->subatoms = mp4p_atom_clone_list (src->subatoms);
     }
+    return dest;
+}
 
-    tail = NULL;
-    mp4p_atom_t *next = src->next;
+// NOTE: the cloned atom's data is a direct pointer to src data.
+// The downside is that the source must exist until the dest is deleted.
+mp4p_atom_t *
+mp4p_atom_clone_list (mp4p_atom_t *src) {
+    mp4p_atom_t *clone = NULL;
+    mp4p_atom_t *tail = NULL;
+    mp4p_atom_t *next = src;
     while (next) {
         mp4p_atom_t *next_copy = mp4p_atom_clone(next);
 
@@ -892,12 +895,12 @@ mp4p_atom_clone (mp4p_atom_t *src) {
             tail = tail->next = next_copy;
         }
         else {
-            tail = dest->next = next_copy;
+            tail = clone = next_copy;
         }
         next = next->next;
     }
 
-    return dest;
+    return clone;
 }
 
 void
@@ -1095,6 +1098,19 @@ mp4p_update_metadata (mp4p_file_callbacks_t *callbacks, mp4p_atom_t *mp4file) {
     }
 
     return 0;
+}
+
+mp4p_atom_t *
+mp4p_atom_meta_find_custom (mp4p_atom_t *ilst, const char *key) {
+    for (mp4p_atom_t *subatom = ilst->subatoms; subatom; subatom = subatom->next) {
+        if (!mp4p_atom_type_compare(subatom, "----")) {
+            mp4p_ilst_meta_t *meta = subatom->data;
+            if (!strcmp (meta->name, key)) {
+                return subatom;
+            }
+        }
+    }
+    return NULL;
 }
 
 int

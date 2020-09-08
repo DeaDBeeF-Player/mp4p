@@ -75,6 +75,9 @@ mp4p_atom_new (const char *type);
 mp4p_atom_t *
 mp4p_atom_clone (mp4p_atom_t *src);
 
+mp4p_atom_t *
+mp4p_atom_clone_list (mp4p_atom_t *src);
+
 uint32_t
 mp4p_atom_subatom_count (mp4p_atom_t *atom);
 
@@ -120,6 +123,9 @@ mp4p_atom_to_buffer (mp4p_atom_t *atom, uint8_t *buffer, uint32_t buffer_size);
 
 int
 mp4p_update_metadata (mp4p_file_callbacks_t *callbacks, mp4p_atom_t *mp4file);
+
+mp4p_atom_t *
+mp4p_atom_meta_find_custom (mp4p_atom_t *ilst, const char *key);
 
 int
 mp4p_trak_playable (mp4p_atom_t *trak_atom);
