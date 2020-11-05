@@ -274,6 +274,7 @@ mp4p_atom_init (mp4p_atom_t *parent_atom, mp4p_atom_t *atom, mp4p_file_callbacks
     ATOM_DEF(chap)
     else {
         atom->data = malloc (atom->size - 8);
+        atom->free = free;
         READ_BUF(fp, atom->data, atom->size - 8);
     }
 

@@ -1006,6 +1006,7 @@ void
 mp4p_esds_atomdata_free (void *data) {
     mp4p_esds_t *esds = data;
     free (esds->asc);
+    free (esds->remainder);
     free (esds);
 }
 
