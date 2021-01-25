@@ -1170,14 +1170,9 @@ mp4p_ilst_meta_atomdata_read (mp4p_ilst_meta_t *atom_data, uint8_t *buffer, size
         buffer_size -= mean_size;
 
         mean_data[mean_size] = 0;
-        int supported_mean = !strncasecmp (mean_data, "com.apple.iTunes", 16);
 
         free (mean_data);
         mean_data = NULL;
-
-        if (!supported_mean) {
-            return -1;
-        }
 
         // name subatom
         uint32_t name_size = READ_UINT32();
