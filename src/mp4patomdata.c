@@ -591,10 +591,28 @@ mp4p_alac_atomdata_read (mp4p_alac_t *atom_data, uint8_t *buffer, size_t buffer_
     // These values are parsed from the ASC blob
     buffer = atom_data->asc;
     buffer_size = atom_data->asc_size;
-    atom_data->channel_count = READ_UINT16();
-    atom_data->bps = READ_UINT16();
-    atom_data->packet_size = READ_UINT16();
-    atom_data->sample_rate = READ_UINT32();
+
+    if (buffer_size == 24) { // backwards compatibility with 24 byte ALACSpecificConfig
+        atom_data->channel_count = READ_UINT16();
+        atom_data->packet_size = READ_UINT16();
+        atom_data->bps = READ_UINT16();
+        atom_data->sample_rate = READ_UINT32();
+    }
+    else if (buffer_size == 48) {
+        buffer += 24;
+        buffer_size -= 24;
+        atom_data->packet_size = READ_UINT32(); // frameLength
+        READ_UINT8(); // compatibleVersion
+        atom_data->bps = READ_UINT8(); // bitDepth
+        READ_UINT8(); // pb
+        READ_UINT8(); // mb
+        READ_UINT8(); // kb
+        atom_data->channel_count = READ_UINT8(); // numChannels
+        READ_UINT16(); // maxRun
+        READ_UINT32(); // maxFrameBytes
+        READ_UINT32(); // avgBitRate
+        atom_data->sample_rate = READ_UINT32(); // sampleRate
+    }
 
     return 0;
 }
