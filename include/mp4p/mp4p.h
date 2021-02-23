@@ -94,6 +94,9 @@ mp4p_atom_t *
 mp4p_atom_append (mp4p_atom_t *parent, mp4p_atom_t *atom);
 
 mp4p_atom_t *
+mp4p_meta_create_atom (void);
+
+mp4p_atom_t *
 mp4p_ilst_create_genre (const char *text);
 
 mp4p_atom_t *

@@ -68,7 +68,9 @@ _load_subatoms (mp4p_atom_t *atom, mp4p_file_callbacks_t *fp) {
     while (fp->tell (fp) < atom->pos + atom->size) {
         mp4p_atom_t *c = _atom_load (atom, fp);
         if (!c) {
-            return -1;
+// FIXME: add proper error reporting
+//            fprintf (stderr, "Failed to read child atom\n");
+            break;
         }
         if (!atom->subatoms) {
             atom->subatoms = tail = c;
@@ -902,6 +904,16 @@ mp4p_atom_clone_list (mp4p_atom_t *src) {
     }
 
     return clone;
+}
+
+mp4p_atom_t *
+mp4p_meta_create_atom (void) {
+    mp4p_atom_t *atom = mp4p_atom_new ("meta");
+    atom->write = (mp4p_atom_data_write_func_t)mp4p_meta_atomdata_write;
+    atom->write_data_before_subatoms = 1;
+    atom->data = calloc (4, 1);
+    atom->free = mp4p_meta_atomdata_free;
+    return atom;
 }
 
 void
