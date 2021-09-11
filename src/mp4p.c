@@ -275,6 +275,16 @@ mp4p_atom_init (mp4p_atom_t *parent_atom, mp4p_atom_t *atom, mp4p_file_callbacks
     ATOM_DEF(chpl)
     ATOM_DEF(chap)
     else {
+        // don't allow weird atom types with out of range characters
+        for (int i = 0; i < 4; i++) {
+            if (atom->type[i] != COPYRIGHT_SYM[0] && (atom->type[i] < '-' || atom->type[i] > 'z')) {
+                return -1;
+            }
+        }
+        // don't load large atoms into RAM
+        if (atom->size > 2*1024*1024) {
+            return 0;
+        }
         atom->data = malloc (atom->size - 8);
         atom->free = free;
         READ_BUF(fp, atom->data, atom->size - 8);
