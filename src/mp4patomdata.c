@@ -241,7 +241,7 @@ mp4p_hdlr_atomdata_free (void *atom_data) {
 
 void
 mp4p_hdlr_init (mp4p_atom_t *hdlr_atom, const char *type, const char *subtype, const char *manufacturer) {
-    mp4p_hdlr_t *hdlr = calloc(sizeof (mp4p_hdlr_t), 1);
+    mp4p_hdlr_t *hdlr = calloc(1, sizeof (mp4p_hdlr_t));
     hdlr_atom->size = 33;
     hdlr_atom->data = hdlr;
     hdlr_atom->free = mp4p_hdlr_atomdata_free;
@@ -322,7 +322,7 @@ mp4p_stts_atomdata_read (mp4p_stts_t *atom_data, uint8_t *buffer, size_t buffer_
 
     atom_data->number_of_entries = READ_UINT32();
     if (atom_data->number_of_entries) {
-        atom_data->entries = calloc (sizeof (mp4p_stts_entry_t), atom_data->number_of_entries);
+        atom_data->entries = calloc (atom_data->number_of_entries, sizeof (mp4p_stts_entry_t));
     }
     for (uint32_t i = 0; i < atom_data->number_of_entries; i++) {
         atom_data->entries[i].sample_count = READ_UINT32();
@@ -367,7 +367,7 @@ mp4p_stsc_atomdata_read (mp4p_stsc_t *atom_data, uint8_t *buffer, size_t buffer_
 
     atom_data->number_of_entries = READ_UINT32();
     if (atom_data->number_of_entries) {
-        atom_data->entries = calloc (sizeof (mp4p_stsc_entry_t), atom_data->number_of_entries);
+        atom_data->entries = calloc (atom_data->number_of_entries, sizeof (mp4p_stsc_entry_t));
     }
     for (uint32_t i = 0; i < atom_data->number_of_entries; i++) {
         atom_data->entries[i].first_chunk = READ_UINT32();
@@ -417,7 +417,7 @@ mp4p_stsz_atomdata_read (mp4p_stsz_t *atom_data, uint8_t *buffer, size_t buffer_
         atom_data->number_of_entries = (uint32_t)(buffer_size / 4);
     }
     if (atom_data->number_of_entries) {
-        atom_data->entries = calloc (sizeof (mp4p_stsz_entry_t), atom_data->number_of_entries);
+        atom_data->entries = calloc (atom_data->number_of_entries, sizeof (mp4p_stsz_entry_t));
     }
     for (uint32_t i = 0; i < atom_data->number_of_entries; i++) {
         atom_data->entries[i].sample_size = READ_UINT32();
@@ -460,7 +460,7 @@ mp4p_stco_atomdata_read (mp4p_stco_t *atom_data, uint8_t *buffer, size_t buffer_
 
     atom_data->number_of_entries = READ_UINT32();
     if (atom_data->number_of_entries) {
-        atom_data->entries = calloc (sizeof (mp4p_stco_entry_t), atom_data->number_of_entries);
+        atom_data->entries = calloc (atom_data->number_of_entries, sizeof (mp4p_stco_entry_t));
     }
     for (uint32_t i = 0; i < atom_data->number_of_entries; i++) {
         atom_data->entries[i].offset = (uint64_t)READ_UINT32();
@@ -502,7 +502,7 @@ mp4p_co64_atomdata_read (mp4p_co64_t *atom_data, uint8_t *buffer, size_t buffer_
 
     atom_data->number_of_entries = READ_UINT32();
     if (atom_data->number_of_entries) {
-        atom_data->entries = calloc (sizeof (mp4p_stco_entry_t), atom_data->number_of_entries);
+        atom_data->entries = calloc (atom_data->number_of_entries, sizeof (mp4p_stco_entry_t));
     }
     for (uint32_t i = 0; i < atom_data->number_of_entries; i++) {
         atom_data->entries[i].offset = READ_UINT64();
@@ -755,7 +755,7 @@ mp4p_dOps_atomdata_read (mp4p_dOps_t *atom_data, uint8_t *buffer, size_t buffer_
     atom_data->output_gain = READ_INT16();
     atom_data->channel_mapping_family = READ_UINT8();
     if (atom_data->channel_mapping_family != 0) {
-        atom_data->channel_mapping_table = calloc (sizeof (mp4p_opus_channel_mapping_table_t), atom_data->output_channel_count);
+        atom_data->channel_mapping_table = calloc (atom_data->output_channel_count, sizeof (mp4p_opus_channel_mapping_table_t));
         for (int i = 0; i < atom_data->output_channel_count; i++) {
             atom_data->channel_mapping_table[i].channel_mapping = calloc(1, atom_data->output_channel_count);
             atom_data->channel_mapping_table[i].stream_count = READ_UINT8();
@@ -1041,7 +1041,7 @@ mp4p_chpl_atomdata_read (mp4p_chpl_t *atom_data, uint8_t *buffer, size_t buffer_
     atom_data->number_of_entries = READ_UINT8();
 
     if (atom_data->number_of_entries) {
-        atom_data->entries = calloc (sizeof (mp4p_chpl_entry_t), atom_data->number_of_entries);
+        atom_data->entries = calloc (atom_data->number_of_entries, sizeof (mp4p_chpl_entry_t));
     }
     for(i = 0; i < atom_data->number_of_entries; i++)
     {

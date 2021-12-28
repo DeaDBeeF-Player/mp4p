@@ -127,7 +127,7 @@ _read_uint32 (mp4p_file_callbacks_t *fp, uint32_t *value) {
 #define FREE_ATOM_BUFFER() free (atombuf);
 
 #define ATOM_DEF_INNER(atomname,headersize)\
-    mp4p_##atomname##_t *atom_data = calloc (sizeof (mp4p_##atomname##_t), 1);\
+    mp4p_##atomname##_t *atom_data = calloc (1, sizeof (mp4p_##atomname##_t));\
     atom->data = atom_data;\
     atom->free = mp4p_##atomname##_atomdata_free;\
     atom->write = (mp4p_atom_data_write_func_t)mp4p_##atomname##_atomdata_write;\
@@ -306,7 +306,7 @@ static mp4p_atom_t *
 _atom_load (mp4p_atom_t *parent_atom, mp4p_file_callbacks_t *fp) {
     size_t fpos = fp->tell (fp);
 
-    mp4p_atom_t *atom = calloc (sizeof (mp4p_atom_t), 1);
+    mp4p_atom_t *atom = calloc (1, sizeof (mp4p_atom_t));
 
     atom->pos = fpos;
 
@@ -741,8 +741,8 @@ mp4p_genre_index_for_name (const char *name) {
 
 mp4p_atom_t *
 mp4p_ilst_create_custom (const char *name, const char *text) {
-    mp4p_atom_t *atom = calloc (sizeof (mp4p_atom_t), 1);
-    mp4p_ilst_meta_t *meta = calloc (sizeof (mp4p_ilst_meta_t), 1);
+    mp4p_atom_t *atom = calloc (1, sizeof (mp4p_atom_t));
+    mp4p_ilst_meta_t *meta = calloc (1, sizeof (mp4p_ilst_meta_t));
     meta->custom = 1;
     atom->data = meta;
     atom->free = mp4p_ilst_meta_atomdata_free;
@@ -762,8 +762,8 @@ mp4p_ilst_create_custom (const char *name, const char *text) {
 
 mp4p_atom_t *
 mp4p_ilst_create_genre (const char *text) {
-    mp4p_atom_t *atom = calloc (sizeof (mp4p_atom_t), 1);
-    mp4p_ilst_meta_t *meta = calloc (sizeof (mp4p_ilst_meta_t), 1);
+    mp4p_atom_t *atom = calloc (1, sizeof (mp4p_atom_t));
+    mp4p_ilst_meta_t *meta = calloc (1, sizeof (mp4p_ilst_meta_t));
     atom->data = meta;
     atom->free = mp4p_ilst_meta_atomdata_free;
     atom->write = (mp4p_atom_data_write_func_t)mp4p_ilst_meta_atomdata_write;
@@ -789,8 +789,8 @@ mp4p_ilst_create_genre (const char *text) {
 
 mp4p_atom_t *
 mp4p_ilst_create_track_disc (const char *type, uint16_t index, uint16_t total) {
-    mp4p_atom_t *atom = calloc (sizeof (mp4p_atom_t), 1);
-    mp4p_ilst_meta_t *meta = calloc (sizeof (mp4p_ilst_meta_t), 1);
+    mp4p_atom_t *atom = calloc (1, sizeof (mp4p_atom_t));
+    mp4p_ilst_meta_t *meta = calloc (1, sizeof (mp4p_ilst_meta_t));
     atom->data = meta;
     atom->free = mp4p_ilst_meta_atomdata_free;
     atom->write = (mp4p_atom_data_write_func_t)mp4p_ilst_meta_atomdata_write;
@@ -809,8 +809,8 @@ mp4p_ilst_create_track_disc (const char *type, uint16_t index, uint16_t total) {
 
 mp4p_atom_t *
 mp4p_ilst_create_text (const char *type, const char *text) {
-    mp4p_atom_t *atom = calloc (sizeof (mp4p_atom_t), 1);
-    mp4p_ilst_meta_t *meta = calloc (sizeof (mp4p_ilst_meta_t), 1);
+    mp4p_atom_t *atom = calloc (1, sizeof (mp4p_atom_t));
+    mp4p_ilst_meta_t *meta = calloc (1, sizeof (mp4p_ilst_meta_t));
     atom->data = meta;
     atom->free = mp4p_ilst_meta_atomdata_free;
     atom->write = (mp4p_atom_data_write_func_t)mp4p_ilst_meta_atomdata_write;
@@ -869,7 +869,7 @@ mp4p_atom_remove_subatom (mp4p_atom_t *atom, mp4p_atom_t *subatom) {
 
 mp4p_atom_t *
 mp4p_atom_new (const char *type) {
-    mp4p_atom_t *atom = calloc (sizeof (mp4p_atom_t), 1);
+    mp4p_atom_t *atom = calloc (1, sizeof (mp4p_atom_t));
     memcpy (atom->type, type, 4);
     return atom;
 }
