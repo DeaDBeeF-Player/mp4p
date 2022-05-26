@@ -3,6 +3,8 @@
 #include <string.h>
 #include <mp4p/mp4p.h>
 
+static __thread int _dbg_indent = 0;
+
 static mp4p_atom_t *
 _atom_load (mp4p_atom_t *parent_atom, mp4p_file_callbacks_t *fp);
 
@@ -37,8 +39,6 @@ mp4p_atom_type_compare (mp4p_atom_t *atom, const char *type) {
     return mp4p_fourcc_compare(atom->type, type);
 }
 
-static int _dbg_indent = 0;
-
 static void
 _dbg_print_fourcc (const char *fourcc) {
     printf ("%c%c%c%c", fourcc[0], fourcc[1], fourcc[2], fourcc[3]);
@@ -53,12 +53,10 @@ _dbg_print_indent (void) {
 
 static void
 _dbg_print_atom (mp4p_atom_t *atom) {
-#if 1
     _dbg_print_indent();
     _dbg_print_fourcc(atom->type);
     printf (" pos=%x size=%x", (int)atom->pos, (int)atom->size);
     printf ("\n");
-#endif
 }
 
 static int
