@@ -2,8 +2,8 @@
 //  mp4patomdata.h
 //  MP4P
 //
-//  Created by Alexey Yakovenko on 4/7/20.
-//  Copyright © 2020 Alexey Yakovenko. All rights reserved.
+//  Created by Oleksiy Yakovenko on 4/7/20.
+//  Copyright © 2020 Oleksiy Yakovenko. All rights reserved.
 //
 
 #ifndef mp4patomdata_h

@@ -3,7 +3,7 @@
 //  MP4P
 //
 //  Created by Oleksiy Yakovenko on 27/12/2016.
-//  Copyright © 2016 Alexey Yakovenko. All rights reserved.
+//  Copyright © 2016 Oleksiy Yakovenko. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
