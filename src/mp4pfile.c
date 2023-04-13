@@ -31,9 +31,9 @@ _file_seek (mp4p_file_callbacks_t *stream, off_t offset, int whence) {
     return lseek (stream->handle, offset, whence);
 }
 
-static int64_t
+static off_t
 _file_tell (mp4p_file_callbacks_t *stream) {
-    return lseek(stream->handle, 0, SEEK_CUR);
+    return (off_t)lseek(stream->handle, 0, SEEK_CUR);
 }
 
 static int
