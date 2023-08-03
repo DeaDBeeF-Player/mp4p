@@ -275,7 +275,7 @@ mp4p_atom_init (mp4p_atom_t *parent_atom, mp4p_atom_t *atom, mp4p_file_callbacks
     else {
         // don't allow weird atom types with out of range characters
         for (int i = 0; i < 4; i++) {
-            if (atom->type[i] != COPYRIGHT_SYM[0] && (atom->type[i] < '-' || atom->type[i] > 'z')) {
+            if (atom->type[i] != COPYRIGHT_SYM[0] && atom->type[i] != ' ' && (atom->type[i] < '-' || atom->type[i] > 'z')) {
                 return -1;
             }
         }
