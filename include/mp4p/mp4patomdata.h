@@ -228,6 +228,9 @@ typedef struct {
     mp4p_common_header_t ch;
 } mp4p_meta_t;
 
+/// ilst `data` atom well-known types (low byte of data_version_flags)
+#define MP4P_ILST_DATA_TYPE_BE_SIGNED_INT 21
+
 typedef struct {
     /// Tells the loader to load `mean` and `name` subatoms
     unsigned custom : 1;
