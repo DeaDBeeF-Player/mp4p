@@ -102,6 +102,11 @@ mp4p_ilst_create_genre (const char *text);
 mp4p_atom_t *
 mp4p_ilst_create_track_disc (const char *type, uint16_t index, uint16_t total);
 
+/// Creates a numeric atom such as `tmpo` or `cpil`, stored as a big-endian signed integer (data type 21)
+/// size is the integer width in bytes: 1, 2 or 4
+mp4p_atom_t *
+mp4p_ilst_create_int (const char *type, int32_t value, uint32_t size);
+
 mp4p_atom_t *
 mp4p_ilst_create_text (const char *type, const char *text);
 

@@ -594,6 +594,46 @@
     XCTAssertEqual(values[3], 0);
 }
 
+- (void)test_tmpoMetaWriteRead_EqualOutput {
+    mp4p_atom_t *meta_atom = mp4p_ilst_create_int ("tmpo", 128, 2);
+    mp4p_ilst_meta_t *data = meta_atom->data;
+
+    size_t bufsize = mp4p_ilst_meta_atomdata_write(data, NULL, 0);
+    XCTAssertEqual (bufsize + 8, meta_atom->size);
+    uint8_t *buffer = malloc (bufsize);
+    size_t writtensize = mp4p_ilst_meta_atomdata_write(data, buffer, bufsize);
+    XCTAssertEqual (bufsize, writtensize);
+
+    mp4p_ilst_meta_t dataread = {0};
+    int res = mp4p_ilst_meta_atomdata_read(&dataread, buffer, bufsize);
+    XCTAssert(!res);
+
+    XCTAssert(!dataread.custom);
+    XCTAssertEqual(dataread.data_size, 2);
+    XCTAssertEqual(dataread.data_version_flags, MP4P_ILST_DATA_TYPE_BE_SIGNED_INT);
+    XCTAssertEqual(dataread.blob[0], 0);
+    XCTAssertEqual(dataread.blob[1], 128);
+}
+
+- (void)test_cpilMetaWriteRead_EqualOutput {
+    mp4p_atom_t *meta_atom = mp4p_ilst_create_int ("cpil", 1, 1);
+    mp4p_ilst_meta_t *data = meta_atom->data;
+
+    size_t bufsize = mp4p_ilst_meta_atomdata_write(data, NULL, 0);
+    XCTAssertEqual (bufsize + 8, meta_atom->size);
+    uint8_t *buffer = malloc (bufsize);
+    size_t writtensize = mp4p_ilst_meta_atomdata_write(data, buffer, bufsize);
+    XCTAssertEqual (bufsize, writtensize);
+
+    mp4p_ilst_meta_t dataread = {0};
+    int res = mp4p_ilst_meta_atomdata_read(&dataread, buffer, bufsize);
+    XCTAssert(!res);
+
+    XCTAssertEqual(dataread.data_size, 1);
+    XCTAssertEqual(dataread.data_version_flags, MP4P_ILST_DATA_TYPE_BE_SIGNED_INT);
+    XCTAssertEqual(dataread.blob[0], 1);
+}
+
 - (void)test_replaygainMetadataWrite_CorrectSize {
     mp4p_atom_t *ilst = mp4p_atom_new ("ilst");
     mp4p_atom_append(ilst, mp4p_ilst_create_custom("REPLAYGAIN_ALBUM_GAIN", "-1 dB"));

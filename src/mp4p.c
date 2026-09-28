@@ -806,6 +806,28 @@ mp4p_ilst_create_track_disc (const char *type, uint16_t index, uint16_t total) {
 }
 
 mp4p_atom_t *
+mp4p_ilst_create_int (const char *type, int32_t value, uint32_t size) {
+    if (size != 1 && size != 2 && size != 4) {
+        return NULL;
+    }
+    mp4p_atom_t *atom = calloc (1, sizeof (mp4p_atom_t));
+    mp4p_ilst_meta_t *meta = calloc (1, sizeof (mp4p_ilst_meta_t));
+    atom->data = meta;
+    atom->free = mp4p_ilst_meta_atomdata_free;
+    atom->write = (mp4p_atom_data_write_func_t)mp4p_ilst_meta_atomdata_write;
+    atom->size = 24+size;
+
+    memcpy (atom->type, type, 4);
+    meta->data_version_flags = MP4P_ILST_DATA_TYPE_BE_SIGNED_INT;
+    meta->data_size = size;
+    meta->blob = malloc (size);
+    for (uint32_t i = 0; i < size; i++) {
+        meta->blob[i] = (uint8_t)((uint32_t)value >> (8 * (size - 1 - i)));
+    }
+    return atom;
+}
+
+mp4p_atom_t *
 mp4p_ilst_create_text (const char *type, const char *text) {
     mp4p_atom_t *atom = calloc (1, sizeof (mp4p_atom_t));
     mp4p_ilst_meta_t *meta = calloc (1, sizeof (mp4p_ilst_meta_t));
